@@ -1,0 +1,28 @@
+version: '3.1'
+services:
+
+  main-server:
+    build: .
+    container_name: main-server
+    ports:
+      - "8080:8080"
+    depends_on:
+      - main-db
+    environment:
+      - DB_HOST=main-db
+      - DB_PORT=5432
+      - DB_NAME=main_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1
+
+  main-db:
+    image: postgres:15-alpine
+    volumes:
+      - /var/lib/postgresql/tms/main
+    container_name: main-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=main_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1
