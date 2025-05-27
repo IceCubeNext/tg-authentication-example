@@ -1,4 +1,4 @@
-package ru.nextcloud.tg_authentication_example;
+package ru.nextcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
