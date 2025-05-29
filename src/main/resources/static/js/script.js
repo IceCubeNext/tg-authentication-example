@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     try {
         const param = new URLSearchParams({initData: initData});
-        const url = `https://yourserver.ru/init?${param}`;
+        const url = `https://icecubenext.ru/init?${param}`;
         await fetch(url)
             .then(response => response.text())
             .then(html => document.body.innerHTML = html);

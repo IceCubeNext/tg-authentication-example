@@ -24,7 +24,7 @@ public class ExampleController {
 
     @GetMapping("/init")
     public String getUser(@RequestParam(name = "initData") String initData, Model model) throws JsonProcessingException {
-        log.info("Get user with initData");
+        log.info("Get user with initData: {}", initData);
         model.addAttribute("user", userService.addUser(initData));
         return "userdata";
     }
