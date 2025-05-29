@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', async () => {
-
     const initData = window.Telegram.WebApp.initData;
 
     if (!initData) {
@@ -13,7 +12,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ initData })
+            body: initData
         });
 
         const html = await response.text();
