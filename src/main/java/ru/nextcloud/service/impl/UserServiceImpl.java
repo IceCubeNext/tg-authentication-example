@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         Map<String, String> data = parseInitData(initData);
 
         if (!TelegramAuthVerifier.isValid(data, botToken)) {
-            log.debug("invalid initData");
+            log.info("invalid initData");
             return new User(0L, "нет данных", "нет данных", "нет данных");
         }
 
@@ -51,15 +51,15 @@ public class UserServiceImpl implements UserService {
         return repository.save(user);
     }
 
-    private Map<String, String> parseInitData(String initData) {
-        Map<String, String> map = new HashMap<>();
-        String[] pairs = initData.split("&");
-        for (String pair : pairs) {
-            String[] kv = pair.split("=", 2);
-            if (kv.length == 2) {
-                map.put(kv[0], URLDecoder.decode(kv[1], StandardCharsets.UTF_8));
-            }
+    private static Map<String, String> parseInitData(String initData) {
+        Map<String, String> result = new HashMap<>();
+        String[] params = initData.split("&");
+        for (String param : params) {
+            String[] pair = param.split("=");
+            String key = URLDecoder.decode(pair[0], StandardCharsets.UTF_8);
+            String value = URLDecoder.decode(pair[1], StandardCharsets.UTF_8);
+            result.put(key, value);
         }
-        return map;
+        return result;
     }
 }
