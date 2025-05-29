@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', async () => {
+
     const initData = window.Telegram.WebApp.initData;
 
     if (!initData) {
@@ -6,13 +7,17 @@ window.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-
     try {
-        const param = new URLSearchParams({initData: initData});
-        const url = `https://icecubenext.ru/init?${param}`;
-        await fetch(url)
-            .then(response => response.text())
-            .then(html => document.body.innerHTML = html);
+        const response = await fetch("https://your_server.ru/init", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ initData })
+        });
+
+        const html = await response.text();
+        document.body.innerHTML = html;
     } catch (err) {
         console.error(err);
         document.getElementById('err').innerText = err;

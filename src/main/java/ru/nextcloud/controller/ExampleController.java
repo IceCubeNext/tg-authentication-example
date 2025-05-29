@@ -22,8 +22,8 @@ public class ExampleController {
         return "index";
     }
 
-    @GetMapping("/init")
-    public String getUser(@RequestParam(name = "initData") String initData, Model model) throws JsonProcessingException {
+    @PostMapping("/init")
+    public String getUser(@RequestBody String initData, Model model) throws JsonProcessingException {
         log.info("Get user with initData: {}", initData);
         model.addAttribute("user", userService.addUser(initData));
         return "userdata";
