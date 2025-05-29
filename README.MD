@@ -29,6 +29,7 @@ git clone https://github.com/IceCubeNext/tg-authentication-example.git
 Выбрать для проекта jdk amazon corretto 17.0.14
 
 В корне проекта создать файл env.properties. В данный файл сохранить токен для связанного с приложением телеграм-бота.
+
 напр.: TOKEN=12345678:AAEdYNWyuTDGFdrFHYrtyrGTKs
 
 В файле /resources/static/js/script.js вписать адрес своего сервера
