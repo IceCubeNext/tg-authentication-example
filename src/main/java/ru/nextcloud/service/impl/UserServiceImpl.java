@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.nextcloud.model.User;
 import ru.nextcloud.repository.UserRepository;
 import ru.nextcloud.service.UserService;
+import ru.nextcloud.utils.TelegramAuthVerifier;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -31,10 +32,10 @@ public class UserServiceImpl implements UserService {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> data = parseInitData(initData);
 
-//        if (!TelegramAuthVerifier.isValid(data, botToken)) {
-//            log.debug("invalid initData");
-//            return new User(0L, "нет данных", "нет данных", "нет данных");
-//        }
+        if (!TelegramAuthVerifier.isValid(data, botToken)) {
+            log.debug("invalid initData");
+            return new User(0L, "нет данных", "нет данных", "нет данных");
+        }
 
         String userJson = data.get("user");
         User user = mapper.readValue(userJson, User.class);
@@ -43,6 +44,7 @@ public class UserServiceImpl implements UserService {
             User oldUser = repository.findById(user.getId()).get();
             oldUser.setFirstName(user.getFirstName());
             oldUser.setLastName(user.getLastName());
+            oldUser.setUsername(user.getUsername());
             return repository.save(oldUser);
         }
 

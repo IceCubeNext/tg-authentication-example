@@ -15,27 +15,21 @@ public class TelegramAuthVerifier {
         Map<String, String> dataCheckMap = new HashMap<>(data);
         dataCheckMap.remove("hash");
 
-        // Sort keys
         List<String> keys = new ArrayList<>(dataCheckMap.keySet());
         Collections.sort(keys);
 
-        // Build data-check-string
         StringBuilder dataCheckString = new StringBuilder();
         for (String key : keys) {
             dataCheckString.append(key).append("=").append(dataCheckMap.get(key)).append("\n");
         }
-        // Remove trailing newline
         if (dataCheckString.length() > 0) {
             dataCheckString.setLength(dataCheckString.length() - 1);
         }
 
-        // Generate secret key
         byte[] secretKey = sha256(botToken.getBytes(StandardCharsets.UTF_8));
 
-        // Compute HMAC-SHA256
         String computedHash = hmacSha256Hex(secretKey, dataCheckString.toString());
 
-        // Compare
         return computedHash.equals(receivedHash);
     }
 
