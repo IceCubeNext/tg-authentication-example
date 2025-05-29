@@ -6,13 +6,14 @@ window.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+
     try {
-        const response = await fetch("https://icecubenext.ru/init", {
+        const response = await fetch("https://your_server.ru/init", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: initData
+            body: JSON.stringify({initData})
         });
 
         const html = await response.text();

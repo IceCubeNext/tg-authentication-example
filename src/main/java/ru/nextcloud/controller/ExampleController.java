@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.nextcloud.service.UserService;
 
+import java.util.Map;
+
 @Slf4j
 @Controller
 @AllArgsConstructor
@@ -23,7 +25,7 @@ public class ExampleController {
     }
 
     @PostMapping("/init")
-    public String getUser(@RequestBody String initData, Model model) throws JsonProcessingException {
+    public String getUser(@RequestBody Map<String, String> initData, Model model) throws JsonProcessingException {
         log.info("Get user with initData: {}", initData);
         model.addAttribute("user", userService.addUser(initData));
         return "userdata";

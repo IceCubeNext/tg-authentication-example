@@ -28,9 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User addUser(String initData) throws JsonProcessingException {
+    public User addUser(Map<String, String> initData) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> data = parseInitData(initData);
+        Map<String, String> data = parseInitData(initData.get("initData"));
 
         if (!TelegramAuthVerifier.isValid(data, botToken)) {
             log.info("invalid initData");
