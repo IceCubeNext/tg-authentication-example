@@ -6,7 +6,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    document.getElementById('result').innerText = initData;
 
     try {
         const param = new URLSearchParams({initData: initData});
