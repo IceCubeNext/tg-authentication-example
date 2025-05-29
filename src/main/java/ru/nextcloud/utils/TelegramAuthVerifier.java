@@ -14,9 +14,13 @@ public class TelegramAuthVerifier {
     public static boolean isValid(Map<String, String> data, String botToken) {
         try {
             String receivedHash = data.remove("hash");
+            log.info("receivedHash: " + receivedHash);
             String checkString = buildCheckString(data);
+            log.info("checkString: " + checkString);
             String secretKey = sha256(botToken);
+            log.info("secretKey: " + secretKey);
             String calculatedHash = hmacSha256(checkString, secretKey);
+            log.info("calculatedHash: " + calculatedHash);
             return calculatedHash.equals(receivedHash);
         } catch (Exception e) {
             log.info(e.getMessage());

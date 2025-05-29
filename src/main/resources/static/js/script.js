@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const response = await fetch("https://your_server.ru/init", {
+        const response = await fetch("https://icecubenext.ru/init", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
